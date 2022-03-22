@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" type="text/javascript"></script>
+
+    <div class="container">
+      <div class="background">
+        <div id="grid-container"></div>
+      </div>
+
+      <div id="buttons">
+
+        <div class="topButtons">
+
+          <button id="gridResetButton">Reset Grid</button>
+          <button id="pathResetButton">Reset Path</button>
+          <button id="weightButton">Update Weights</button>
+          
+          <select id="terrainSelect">
+            <option value="start">Start</option>
+            <option value="end">End</option>
+            <option value="plain">Plain</option>
+            <option value="forest">Forest</option>
+            <option value="river">River</option>
+            <option value="obstacle">Obstacle</option>
+          </select>
+          <div id="thumbnail">
+            <span class="plain"></span>
+          </div>
+          <button id="weightToggle">Toggle Weights</button>
+        </div>
+
+        <div class="botButtons">
+          <button id="bfs">BFS</button>
+          <button id="dijkstra">Dijkstra</button>
+          <button id="astar">A*</button>
+        </div>
+      </div>
+    </div>
+    
+    <script src="priorityQueue.js" type="text/javascript"></script>
+    <script src="pathfinder.js" type="text/javascript"></script>
+    <script src="mapDisplay.js" type="text/javascript"></script>
+  </body>
+</html>

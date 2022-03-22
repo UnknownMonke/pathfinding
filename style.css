@@ -1,0 +1,110 @@
+.container {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .background {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+  }
+
+  #grid-container {  
+    display: grid;
+    grid-template-columns: repeat(20, auto);
+    grid-template-rows: repeat(20, auto);
+    width: max-content;
+    height: max-content;
+    cursor: crosshair;
+  }
+
+  #grid-container div {
+    width: 28px;
+    height: 28px;
+    border: 1px solid white;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #grid-container div .weight {
+    font-size: 12px;
+    cursor: default;
+    /* Disable text selection */
+    -webkit-user-select: none;  
+    -moz-user-select: none;    
+    -ms-user-select: none;      
+    user-select: none;
+  }
+
+  #grid-container div .weight.hidden {
+    display: none;
+  }
+
+  #buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 32px;
+  }
+
+  #buttons .topButtons, #buttons .botButtons {
+    display: inline-flex;
+    width: 100%;
+    justify-content: center;
+    padding: 8px 0;
+  }
+
+  #buttons button:nth-child(n) {
+    margin-right: 6px;
+  }
+
+  #buttons #thumbnail {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 6px;
+  }
+
+  #buttons #thumbnail span {
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+  }
+
+  #weightToggle {
+    margin-left: 32px;
+  }
+
+  .obstacle {
+    background-color: #666560;
+  }
+  .plain {
+    background-color: #d8d8d4;
+  }
+  .forest {
+    background-color: #a5bca2;
+  }
+  .river {
+    background-color: #7c9bdd;
+  }
+  .end {
+    background-color: red;
+  }
+  .start {
+    background-color: green;
+  }
+  .path {
+    background-color: #e58e9c;
+  }
+  .frontier {
+    opacity: 0.5;
+  }
