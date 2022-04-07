@@ -12,11 +12,9 @@
         astar: astar
     };
 
-
     // ----------------------------------------------------
     //                       UTILITY
     // ----------------------------------------------------
-
     // These methods may depends upon graph implementation.
 
     function visitCell(x, y, visited) {
@@ -27,7 +25,7 @@
         return c1[0] === c2[0] && c1[1] === c2[1];
     }
 
-    // Manhattan distance
+    // Manhattan distance (L1-norm).
     function heuristic(c1, c2) {
         return Math.abs(c2[0] - c1[0]) + Math.abs(c2[1] - c1[1]);
     }
@@ -38,8 +36,8 @@
     }
 
     /**
-     * Find the cell neighbors from the given coordinates that are not an obstacle and have not already been visited,
-     * push the neighbor into the frontier.
+     * Finds the cell neighbors from the given coordinates that are not an obstacle and have not already been visited,
+     * pushes the neighbor into the frontier.
      */
     function findNeighbors(x, y, visited) {
         let neighbors = [];
@@ -69,7 +67,7 @@
      * 
      * ---
      * 
-     * Reconstruct the path using the visited map:
+     * Reconstructs the path using the visited map:
      * - Each node of the map contains the node from where we came from.
      * - Starting from the exit, we find the node from which we've found the exit,
      * then its previous node, and so on.
@@ -91,25 +89,23 @@
             }
             current = visited.get(current.toString());
         }
-        // Append the starting node to the path.
+        // Appends the starting node to the path.
         endPath.push(map.startCell);
 
         return endPath;
     }
     
-
     // ----------------------------------------------------
     //                      ALGORITHMS
     // ----------------------------------------------------
 
-
     /**
-     * Find path using a Breadth First Search (BFS) algorithm, with early exit.
+     * Finds path using a Breadth First Search (BFS) algorithm, with early exit.
      * 
      * We explore each node of the graph, and store the visited nodes in a map, along with the node we came from.
      * 
      * All the direct neighbors of the visited nodes are stored in the frontier.
-     * The frontier expand along with the number of visited nodes.
+     * The frontier expands along with the number of visited nodes.
      * 
      * Once we reach the exit, the algorithm stops.
      * 
@@ -129,7 +125,7 @@
      * 
      * ---
      * 
-     * Once the loop terminate, we reconstruct the path using the visited map.
+     * Once the loop terminates, we reconstruct the path using the visited map.
      * 
      * @returns the path from finish to start.
      */
@@ -149,17 +145,17 @@
             if(frontier.length === 0) { // Exit condition.
                 clearInterval(global.currentInterval);
 
-                // Update the found path.
+                // Updates the found path.
                 pathfinder.endPath = pathReconstruct(visited, map);
 
-                console.log('exit');
+                console.info('exit');
 
             } else {
                 // 1 - Pop the first added node from the frontier and make it the current node.
                 let currentCell = frontier[0];
                 frontier.splice(0,1);
 
-                // Draw the frontier for visualization.
+                // Draws the frontier for visualization.
                 if(!equals(currentCell, map.startCell) && !equals(currentCell, map.endCell)) {
                     map.toggleCell(currentCell[0], currentCell[1], 'frontier');
                 }
@@ -186,12 +182,12 @@
     }
 
     /**
-     * Find path using Dijkstra's algorithm, with early exit.
+     * Finds path using Dijkstra's algorithm, with early exit.
      * 
      * We explore each node of the map, store the visited nodes in a map, along with the node we came from.
      * 
      * All the direct neighbors of the visited nodes are stored in the frontier.
-     * The frontier expand along with the number of visited nodes.
+     * The frontier expands along with the number of visited nodes.
      * 
      * Once we reach the exit, the algorithm stops.
      * 
@@ -220,7 +216,7 @@
      *              - 2 - If the neighbor is not in the cumulated cost array or the newly computed cost is lower than the previously computed cost (node already visited):
      *              - 3 - Enqueue the neighbor to the frontier, update its cumulated cost, and mark it as visited.
      * 
-     * Once the loop terminate, we reconstruct the path using the visited map.
+     * Once the loop terminates, we reconstruct the path using the visited map.
      * 
      * @returns the path from finish to start.
      */
@@ -241,16 +237,16 @@
             if(frontier.isEmpty()) { // Exit condition.
                 clearInterval(global.currentInterval);
 
-                // Update the found path.
+                // Updates the found path.
                 pathfinder.endPath = pathReconstruct(visited, map);
 
-                console.log('exit');
+                console.info('exit');
 
             } else {
                 // 1 - Dequeue the lowest priority node from the frontier and make it the current node.
                 let currentCell = frontier.dequeue().element;
 
-                // Draw the frontier for visualization.
+                // Draws the frontier for visualization.
                 if(!equals(currentCell, map.startCell) && !equals(currentCell, map.endCell)) {
                     map.toggleCell(currentCell[0], currentCell[1], 'frontier');
                 }
@@ -289,7 +285,7 @@
     }
     
     /**
-     * Find path using Astar algorithm, with early exit.
+     * Finds path using Astar algorithm, with early exit.
      * 
      * Same as Dijkstra's algorithm, but we change the way the priority is calculated:
      * - We try to eliminate nodes that we estimate being too far from the exit by adding an heuristic function to the priority.
@@ -310,7 +306,7 @@
      *              - 2 - If the neighbor is not in the cumulated cost array or the newly computed cost is lower than the previously computed cost (node already visited):
      *              - 3 - Compute the new priority by adding the heuristic to the new cost, enqueue the neighbor to the frontier with the priority, update its cumulated cost, and mark it as visited.
      * 
-     * Once the loop terminate, we reconstruct the path using the visited map.
+     * Once the loop terminates, we reconstruct the path using the visited map.
      * 
      * @returns the path from finish to start.
      */
@@ -331,16 +327,16 @@
             if(frontier.isEmpty()) { // Exit condition.
                 clearInterval(global.currentInterval);
 
-                // Update the found path
+                // Updates the found path.
                 pathfinder.endPath = pathReconstruct(visited, map);
 
-                console.log('exit');
+                console.info('exit');
 
             } else {
                 // 1 - Dequeue the lowest priority node from the frontier and make it the current node.
                 let currentCell = frontier.dequeue().element;
 
-                // Draw the frontier for visualization.
+                // Draws the frontier for visualization.
                 if(!equals(currentCell, map.startCell) && !equals(currentCell, map.endCell)) {
                     map.toggleCell(currentCell[0], currentCell[1], 'frontier');
                 }
@@ -387,5 +383,4 @@
     } else {
         global.pathfinder = pathfinder;
     }
-
 })(this);

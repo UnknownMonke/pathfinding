@@ -1,13 +1,12 @@
-/* Javascript implementation of Priority Queue returning lowest priority first. */
-
 class QueueElement {
-
+    
     constructor(element, priority) {
         this.element = element;
         this.priority = priority;
     }
 }
 
+/** Javascript implementation of Priority Queue returning lowest priority first. */
 class PriorityQueue {
 
     constructor() {

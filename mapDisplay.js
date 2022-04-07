@@ -15,11 +15,9 @@
         validate: validate
     };
 
-
     // ----------------------------------------------------
     //                       UTILITY
     // ----------------------------------------------------
-
 
     function isStartSet() {
         return map.startCell.length > 0;
@@ -29,22 +27,22 @@
         return map.endCell.length > 0;
     }
 
-    // Check if given coordinates are in the map.
+    // Checks if given coordinates are in the map.
     function isBound(x, y) {
         return x >= 0 && y >= 0 && x < map.mapSize && y < map.mapSize;
     }
 
-    // Check if given coordinates are in the map and the cell is not an obstacle.
+    // Checks if given coordinates are in the map and the cell is not an obstacle.
     function validate(x, y) {
         return isBound(x, y) && map.grid[x][y].type !== 'obstacle';
     }
 
-    // Return a random float between min and max - 1.
+    // Returns a random float between min and max - 1.
     function random(min, max) {
         return Math.random() * (max - min) + min;
     }
 
-    // Toggle an additional cell type.
+    // Toggles an additional cell type.
     function toggleCell(x, y, cellType) {
         $(`[id="[${x},${y}]"]`).toggleClass(cellType);
     }
@@ -60,7 +58,7 @@
     }
 
     /**
-     * Reset the game state (start, end, selected terrain...) and draw the default grid with default terrain (plain) and default weight (1).  
+     * Resets the game state (start, end, selected terrain...) and draws the default grid with default terrain (plain) and default weight (1).  
      */ 
     function resetGrid() {
         // --------- Resets ---------
@@ -86,22 +84,20 @@
                         <span class='weight'>1</span>
                     </div>`
                 );
-
-                // Append to map.
+                // Appends to map.
                 if(typeof map.grid[i] === 'undefined') {
                     map.grid[i] = new Array(map.mapSize);
                 }
                 map.grid[i][j] = { type: 'plain', weight: 1 };
             }
         }
-
-        // Bind click event to newly created cells.
+        // Binds click event to newly created cells.
         $('div.cell').click(function() {
             clickCell(this);
         });
     }
 
-    // Reset only the pathfinding elements, and keep the map with the terrain set.
+    // Resets only the pathfinding elements, and keep the map with the terrain set.
     function resetPath() {
         clearInterval(global.currentInterval);
 
@@ -116,7 +112,7 @@
         });
     }
 
-    // Set terrain by clicking on the cell, reset the start or exit if they are deleted.
+    // Sets terrain by clicking on the cell, resets the start or exit if they are deleted.
     function clickCell(cell) {
         try {
             let x = parseInt($(cell).attr('data-x'));
@@ -151,7 +147,7 @@
     }
 
     /**
-     * Dynamically set the weights for each cell according to its terrain type.
+     * Dynamically sets the weights for each cell according to its terrain type.
      * 
      * ---
      * 
@@ -211,28 +207,26 @@
         }
     }
 
-
     // ----------------------------------------------------
     //                       EVENTS
     // ----------------------------------------------------
-
     
     // Init grid on page load.
     resetGrid();
 
-    // Update terrain selection.
+    // Updates terrain selection.
     $('#terrainSelect').change(function() {
 
         const value = $(this).find(':selected').val();
-        // Update thumbnail.
+        // Updates thumbnail.
         $('#thumbnail').children()[0].className = value;
 
         map.selectedTerrain = value;
     });
 
     /** 
-     * Set terrain continuously by dragging the mouse.
-     * Take into account leaving the area with or without the mouse still down.
+     * Sets terrain continuously by dragging the mouse.
+     * Takes into account leaving the area with or without the mouse still down.
      */
     $('#grid-container').mousedown(function() {
 
@@ -241,7 +235,7 @@
         $(this).mousemove(function() {
             let cellBeneath = $($(':hover')).closest('div.cell')[0];
 
-            // Reset start and exit if we move over.
+            // Resets start and exit if we move over.
             if(cellBeneath.className.includes('start')) {
                 map.startCell = [];
             }
@@ -335,5 +329,4 @@
     } else {
         global.map = map;
     }
-
 })(this);
