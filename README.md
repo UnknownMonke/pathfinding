@@ -2,9 +2,10 @@
 
 Some Fooling around with pathfinding algorithms, inspired by this [very interesting article](https://www.redblobgames.com/pathfinding/a-star/introduction.html).
 
-I implemented a customizable grid to visualize the process with various terrains (require jQuery).
+I implemented a customizable grid to visualize the process with various terrains.
 
 The repo works as a standalone, so running the html in a browser should be good.
+This program uses [jQuery](https://jquery.com), internet connection is **required**.
 
 Algorithms :
 
@@ -20,4 +21,4 @@ After setting the start and end tile, the button 'Update Weights' will generate 
 
 The algorithm will take that into account when finding the shortest path from start to end.
 
-The path resulution is animated to see the explore tiles as well as path reconstruction.
+The path resolution is animated to see the explore tiles as well as path reconstruction.
