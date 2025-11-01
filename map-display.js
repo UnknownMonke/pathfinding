@@ -70,7 +70,7 @@
         $('#grid-container').html('');
 
         // Default terrain is plain.
-        $('#terrainSelect').prop('selectedIndex', 2);
+        $('#terrain-select').prop('selectedIndex', 2);
         $('#thumbnail').children()[0].className = 'plain';
         map.selectedTerrain = 'plain';
 
@@ -215,7 +215,7 @@
     resetGrid();
 
     // Updates terrain selection.
-    $('#terrainSelect').change(function() {
+    $('#terrain-select').change(function() {
 
         const value = $(this).find(':selected').val();
         // Updates thumbnail.
@@ -229,7 +229,6 @@
      * Takes into account leaving the area with or without the mouse still down.
      */
     $('#grid-container').mousedown(function() {
-
         $(this).unbind('mousemove');
 
         $(this).mousemove(function() {
@@ -261,19 +260,19 @@
 
     // --------- Buttons ---------
 
-    $('#gridResetButton').click(function() {
+    $('#grid-reset-button').click(function() {
         resetGrid();
     });
 
-    $('#pathResetButton').click(function() {
+    $('#path-reset-button').click(function() {
         resetPath();
     });
 
-    $('#weightButton').click(function() {
+    $('#weight-button').click(function() {
         setWeights();
     });
 
-    $('#weightToggle').click(function() {
+    $('#weight-toggle').click(function() {
         toggleWeights();
     });
 
